@@ -1,0 +1,26 @@
+{% extends "base_without.html" %}
+
+{% load bootstrap4 %}
+
+{% block content1 %}
+<div class="container">
+    <table class="table align-items-center table-flush">
+        <thead>
+            <th>Crop</th>
+            <th>Rate</th>
+            <th>Quantity</th>
+            <th></th>
+        </thead>
+        {% for sale in sale_list.all %}
+        <tr>
+            <td>{{ sale.crop.name }}</td>
+            <td>{{ sale.rate }}</td>
+            <td>{{ sale.quantity }}</td>
+            <td><a href="{% url 'comps:edit_sale' pk=sale.pk %}">Edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>  
+    <a href="{% url 'comps:add_sale'%}"><button class="btn btn-primary">Add</button></a>
+</div>
+
+{% endblock content1 %}

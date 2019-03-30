@@ -1,0 +1,32 @@
+{% extends "base_without.html" %}
+
+{% load bootstrap4 %}
+
+{% block content1 %}
+<div class="container">
+    <table class="table align-items-center table-flush">
+        <thead>
+            <th>Name</th>
+            <th>Role</th>
+            <th>WorkerType</th>
+            <th>Toggle</th>
+            <th>Edit</th>
+        </thead>
+        {% for worker in worker_list.all %}
+        <tr>
+            <td>{{ worker.name }}</td>
+            <td>{{ worker.role }}</td>
+            <td>{{ worker.wtype }}</td>
+            {% if worker.is_active %}
+                <td><a href="{% url 'comps:toggle_worker' pk=worker.pk %}">Active</a></td>
+            {% else %}
+                <td><a href="{% url 'comps:toggle_worker' pk=worker.pk %}">Not Active</a></td>
+            {% endif %}
+            <td><a href="{% url 'comps:edit_worker' pk=worker.pk %}">Edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>  
+    <a href="{% url 'comps:add_worker'%}"><button class="btn btn-primary">Add</button></a>
+</div>
+
+{% endblock content1 %}

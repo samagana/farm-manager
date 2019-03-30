@@ -1,0 +1,31 @@
+{% extends "base_without.html" %}
+
+{% load bootstrap4 %}
+
+{% block content1 %}
+<div class="container">
+    <table class="table align-items-center table-flush">
+        <thead>
+            <th>Date</th>
+            <th>Expenditure</th>
+            <th>Income</th>
+            <th>Profit</th>
+            <th></th>
+        </thead>
+        {% for prof in profit_list.all %}
+        <tr>
+            <td>{{ prof.date }}</td>
+            <td>{{ prof.expenditure }}</td>
+            <td>{{ prof.income }}</td>
+            <td>{{ prof.profit }}</td>
+            <td><form method="POST" action="{% url 'comps:delete_prof' pk=prof.pk %}">
+                    {% csrf_token %}<input type="submit" value="DELETE">
+                 </form>
+                </td>
+        </tr>
+        {% endfor %}
+    </table>  
+    <a href="{% url 'comps:gen_profit'%}"><button class="btn btn-primary">Generate 1 month profits</button></a>
+</div>
+
+{% endblock content1 %}

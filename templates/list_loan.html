@@ -1,0 +1,30 @@
+{% extends "base_without.html" %}
+
+{% load bootstrap4 %}
+
+{% block content1 %}
+<div class="container">
+    <table class="table align-items-center table-flush">
+        <thead>
+            <th>Loan Type</th>
+            <th>Loan ID</th>
+            <th>EMI</th>
+            <th>Amount</th>
+            <th>Address</th>
+            <th></th>
+        </thead>
+        {% for loan in loan_list.all %}
+        <tr>
+            <td>{{ loan.loan_type }}</td>
+            <td>{{ loan.loan_id }}</td>
+            <td>{{ loan.emi }}</td>
+            <td>{{ loan.amount }}</td>
+            <td>{{ loan.address }}</td>
+            <td><a href="{% url 'comps:edit_loan' pk=loan.pk %}">Edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>  
+    <a href="{% url 'comps:add_loan'%}"><button class="btn btn-primary">Add</button></a>
+</div>
+
+{% endblock content1 %}

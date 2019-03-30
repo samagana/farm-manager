@@ -1,0 +1,34 @@
+{% extends "base_without.html" %}
+
+{% load bootstrap4 %}
+
+{% block content1 %}
+<div class="container">
+    <table class="table align-items-center table-flush">
+        <thead>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Cost</th>
+            <th>Quantity</th>
+            <th>Active?</th>
+            <th></th>
+        </thead>
+        {% for fertilizer in fertilizer_list.all %}
+        <tr>
+            <td>{{ fertilizer.name }}</td>
+            <td>{{ fertilizer.description }}</td>
+            <td>{{ fertilizer.cost }}</td>
+            <td>{{ fertilizer.quantity }}</td>
+            {% if fertilizer.is_active %}
+                <td><a href="{% url 'comps:toggle_fertilizer' pk=fertilizer.pk %}">Active</a></td>
+            {% else %}
+                <td><a href="{% url 'comps:toggle_fertilizer' pk=fertilizer.pk %}">Not Active</a></td>
+            {% endif %}
+            <td><a href="{% url 'comps:edit_fertilizer' pk=fertilizer.pk %}">Edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>  
+    <a href="{% url 'comps:add_fertilizer'%}"><button class="btn btn-primary">Add</button></a>
+</div>
+
+{% endblock content1 %}

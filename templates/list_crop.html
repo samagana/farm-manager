@@ -1,0 +1,32 @@
+{% extends "base_without.html" %}
+
+{% load bootstrap4 %}
+
+{% block content1 %}
+<div class="container">
+    <table class="table align-items-center table-flush">
+        <thead>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Quanity</th>
+            <th>Active?</th>
+            <th></th>
+        </thead>
+        {% for crop in crop_list.all %}
+        <tr>
+            <td>{{ crop.name }}</td>
+            <td>{{ crop.description }}</td>
+            <td>{{ crop.quantity }}</td>
+            {% if crop.is_active %}
+                <td><a href="{% url 'comps:toggle_crop' pk=crop.pk %}">Active</a></td>
+            {% else %}
+                <td><a href="{% url 'comps:toggle_crop' pk=crop.pk %}">Not Active</a></td>
+            {% endif %}
+            <td><a href="{% url 'comps:edit_crop' pk=crop.pk %}">Edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>  
+    <a href="{% url 'comps:add_crop'%}"><button class="btn btn-primary">Add</button></a>
+</div>
+
+{% endblock content1 %}

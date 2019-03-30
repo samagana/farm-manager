@@ -1,0 +1,34 @@
+{% extends "base_without.html" %}
+
+{% load bootstrap4 %}
+
+{% block content1 %}
+<div class="container">
+    <table class="table align-items-center table-flush">
+        <thead>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Cost</th>
+            <th>Quantity</th>
+            <th>Active?</th>
+            <th></th>
+        </thead>
+        {% for insecticide in insecticide_list.all %}
+        <tr>
+            <td>{{ insecticide.name }}</td>
+            <td>{{ insecticide.description }}</td>
+            <td>{{ insecticide.cost }}</td>
+            <td>{{ insecticide.quantity }}</td>
+            {% if insecticide.is_active %}
+                <td><a href="{% url 'comps:toggle_insecticide' pk=insecticide.pk %}">Active</a></td>
+            {% else %}
+                <td><a href="{% url 'comps:toggle_insecticide' pk=insecticide.pk %}">Not Active</a></td>
+            {% endif %}
+            <td><a href="{% url 'comps:edit_insecticide' pk=insecticide.pk %}">Edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>  
+    <a href="{% url 'comps:add_insecticide'%}"><button class="btn btn-primary">Add</button></a>
+</div>
+
+{% endblock content1 %}
